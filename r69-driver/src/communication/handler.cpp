@@ -32,7 +32,6 @@ bool is_user_range(uint64_t va, uint64_t size) {
 	return true;
 }
 
-/** Caller (Expectional) user VA -> kernel buffer, tamamen fiziksel okuma. */
 bool phys_copy_in(uint64_t caller_dtb, uint64_t user_va, void* kernel_dst, size_t size) {
 	if (!caller_dtb || !user_va || !kernel_dst || !size)
 		return false;
@@ -63,7 +62,6 @@ bool phys_copy_in(uint64_t caller_dtb, uint64_t user_va, void* kernel_dst, size_
 	return true;
 }
 
-/** Kernel buffer -> caller user VA, tamamen fiziksel yazma (IRQL-safe). */
 bool phys_copy_out(uint64_t caller_dtb, uint64_t user_va, const void* kernel_src, size_t size) {
 	if (!caller_dtb || !user_va || !kernel_src || !size)
 		return false;
@@ -109,7 +107,6 @@ struct scoped_process_ref {
 	scoped_process_ref& operator=(const scoped_process_ref&) = delete;
 };
 
-/** Process referansi tutulurken adres uzayi hala gecerli mi? */
 bool process_address_space_usable(PEPROCESS process, uint64_t* out_dtb = nullptr) {
 	if (!process)
 		return false;
