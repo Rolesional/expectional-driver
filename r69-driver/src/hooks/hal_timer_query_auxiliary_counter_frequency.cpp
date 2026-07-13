@@ -33,7 +33,6 @@ bool is_expectional_communication_request() {
 } // namespace
 
 NTSTATUS hooks::hal_timer_query_auxiliary_counter_frequency::hook_handler(uint64_t* counter) {
-	/** Kernel / HAL gercek cagrilari: orijinal fonksiyona devret (TrapFrame yok -> corruption riski). */
 	if (!is_expectional_communication_request()) {
 		if (o_function)
 			return o_function(counter);
